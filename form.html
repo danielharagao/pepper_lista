@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pepper Inc. - Lista de Espera</title>
+    <link rel="stylesheet" href="formstyles.css">
+</head>
+<body>
+    <div class="container">
+        <form id="multiStepForm">
+            <!-- Página 1: Boas-Vindas -->
+            <div class="form-page active" data-page="1">
+                <h2>Bem-vindo à Lista de Espera da Pepper Inc.!</h2>
+                <p>Estamos entusiasmados em ter você conosco. Por favor, preencha o formulário abaixo para garantir sua vaga na lista de espera exclusiva.</p>
+                <p>Na Pepper Inc., estamos desenvolvendo uma assistente pessoal digital inteligente que transformará a gestão do seu tempo e tarefas diárias. Para melhor atendê-lo, precisamos conhecer um pouco mais sobre você.</p>
+                <button type="button" class="next-btn">Começar</button>
+            </div>
+
+            <!-- Página 2: Informações Pessoais -->
+            <div class="form-page" data-page="2">
+                <h2>Dados Pessoais</h2>
+                <label for="fullName">Nome Completo:</label>
+                <input type="text" id="fullName" name="fullName" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="whatsapp">Número de WhatsApp:</label>
+                <input type="tel" id="whatsapp" name="whatsapp" placeholder="+55 00 00000-0000" required>
+
+                <label for="age">Idade:</label>
+                <input type="number" id="age" name="age" min="18" max="100" required>
+
+                <label>Gênero:</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="gender" value="Masculino" required> Masculino</label>
+                    <label><input type="radio" name="gender" value="Feminino"> Feminino</label>
+                    <label><input type="radio" name="gender" value="Não-binário"> Não-binário</label>
+                    <label><input type="radio" name="gender" value="Prefiro não dizer"> Prefiro não dizer</label>
+                    <label>Outro: <input type="text" name="gender_other" id="gender_other" disabled></label>
+                </div>
+
+                <div class="navigation-buttons">
+                    <button type="button" class="prev-btn">Anterior</button>
+                    <button type="button" class="next-btn">Próximo</button>
+                </div>
+            </div>
+
+            <!-- Página 3: Perfil Profissional -->
+            <div class="form-page" data-page="3">
+                <h2>Sua Vida Profissional</h2>
+                <label for="occupation">Ocupação Atual:</label>
+                <input type="text" id="occupation" name="occupation" required>
+
+                <label for="sector">Setor de Atuação:</label>
+                <select id="sector" name="sector" required>
+                    <option value="">Selecione</option>
+                    <option value="Tecnologia">Tecnologia</option>
+                    <option value="Marketing">Marketing</option>
+                    <option value="Finanças">Finanças</option>
+                    <option value="Empreendedorismo/Startups">Empreendedorismo/Startups</option>
+                    <option value="Educação">Educação</option>
+                    <option value="Saúde">Saúde</option>
+                    <option value="Outro">Outro</option>
+                </select>
+                <input type="text" id="sector_other" name="sector_other" placeholder="Especifique" disabled>
+
+                <label for="experience">Nível de Experiência:</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="experience" value="Iniciante (0-2 anos)" required> Iniciante (0-2 anos)</label>
+                    <label><input type="radio" name="experience" value="Intermediário (3-5 anos)"> Intermediário (3-5 anos)</label>
+                    <label><input type="radio" name="experience" value="Avançado (6+ anos)"> Avançado (6+ anos)</label>
+                </div>
+
+                <label for="income">Renda Mensal:</label>
+                <select id="income" name="income" required>
+                    <option value="">Selecione</option>
+                    <option value="Até R$3.000">Até R$3.000</option>
+                    <option value="R$3.001 - R$6.000">R$3.001 - R$6.000</option>
+                    <option value="R$6.001 - R$10.000">R$6.001 - R$10.000</option>
+                    <option value="Acima de R$10.000">Acima de R$10.000</option>
+                    <option value="Prefiro não dizer">Prefiro não dizer</option>
+                </select>
+
+                <div class="navigation-buttons">
+                    <button type="button" class="prev-btn">Anterior</button>
+                    <button type="button" class="next-btn">Próximo</button>
+                </div>
+            </div>
+
+            <!-- Página 4: Gestão de Tempo e Tarefas -->
+            <div class="form-page" data-page="4">
+                <h2>Como Você Gerencia Suas Tarefas?</h2>
+                <p>Queremos entender melhor suas necessidades e desafios.</p>
+
+                <label>Quais ferramentas você utiliza atualmente para gerenciar suas tarefas e compromissos? (Selecione todas que se aplicam)</label>
+                <div class="checkbox-group">
+                    <label><input type="checkbox" name="tools" value="Google Calendar"> Google Calendar</label>
+                    <label><input type="checkbox" name="tools" value="Microsoft Outlook"> Microsoft Outlook</label>
+                    <label><input type="checkbox" name="tools" value="Trello"> Trello</label>
+                    <label><input type="checkbox" name="tools" value="Asana"> Asana</label>
+                    <label><input type="checkbox" name="tools" value="Todoist"> Todoist</label>
+                    <label><input type="checkbox" name="tools" value="Notion"> Notion</label>
+                    <label><input type="checkbox" name="tools" value="Papel e Caneta"> Papel e Caneta</label>
+                    <label><input type="checkbox" name="tools" value="Outra"> Outra <input type="text" name="tools_other" id="tools_other" placeholder="Especifique" disabled></label>
+                    <label><input type="checkbox" name="tools" value="Nenhuma"> Nenhuma</label>
+                </div>
+
+                <label>Qual é o maior desafio que você enfrenta na gestão do seu tempo?</label>
+                <div class="checkbox-group">
+                    <label><input type="checkbox" name="challenges" value="Sobrecarga de tarefas"> Sobrecarga de tarefas</label>
+                    <label><input type="checkbox" name="challenges" value="Dificuldade em priorizar"> Dificuldade em priorizar</label>
+                    <label><input type="checkbox" name="challenges" value="Falta de ferramentas integradas"> Falta de ferramentas integradas</label>
+                    <label><input type="checkbox" name="challenges" value="Procrastinação"> Procrastinação</label>
+                    <label><input type="checkbox" name="challenges" value="Distrações constantes"> Distrações constantes</label>
+                    <label><input type="checkbox" name="challenges" value="Outro"> Outro <input type="text" name="challenges_other" id="challenges_other" placeholder="Especifique" disabled></label>
+                </div>
+
+                <label for="impact">Como a gestão ineficiente do tempo afeta sua vida profissional e pessoal?</label>
+                <textarea id="impact" name="impact" rows="4" required></textarea>
+
+                <div class="navigation-buttons">
+                    <button type="button" class="prev-btn">Anterior</button>
+                    <button type="button" class="next-btn">Próximo</button>
+                </div>
+            </div>
+
+            <!-- Página 5: Interesse na Pepper Inc. -->
+            <div class="form-page" data-page="5">
+                <h2>Sua Jornada com a Pepper Inc.</h2>
+                <p>Descubra como podemos ajudar você a alcançar mais.</p>
+
+                <label>O que mais te motiva a se inscrever na lista de espera da Pepper?</label>
+                <div class="checkbox-group">
+                    <label><input type="checkbox" name="motivation" value="Acesso antecipado ao produto"> Acesso antecipado ao produto</label>
+                    <label><input type="checkbox" name="motivation" value="Benefícios exclusivos"> Benefícios exclusivos</label>
+                    <label><input type="checkbox" name="motivation" value="Descontos especiais"> Descontos especiais</label>
+                    <label><input type="checkbox" name="motivation" value="Interesse genuíno na solução"> Interesse genuíno na solução</label>
+                    <label><input type="checkbox" name="motivation" value="Recomendações de amigos/influenciadores"> Recomendações de amigos/influenciadores</label>
+                    <label><input type="checkbox" name="motivation" value="Outro"> Outro <input type="text" name="motivation_other" id="motivation_other" placeholder="Especifique" disabled></label>
+                </div>
+
+                <label>Você estaria interessado em participar de testes beta da Pepper?</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="beta_interest" value="Sim" required> Sim</label>
+                    <label><input type="radio" name="beta_interest" value="Não"> Não</label>
+                    <label><input type="radio" name="beta_interest" value="Talvez no futuro"> Talvez no futuro</label>
+                </div>
+
+                <label for="beneficiaries">Quem mais você acha que se beneficiaria com a Pepper? (Opcional)</label>
+                <input type="text" id="beneficiaries" name="beneficiaries">
+
+                <div class="navigation-buttons">
+                    <button type="button" class="prev-btn">Anterior</button>
+                    <button type="button" class="next-btn">Próximo</button>
+                </div>
+            </div>
+
+            <!-- Página 6: Preferências e Feedback -->
+            <div class="form-page" data-page="6">
+                <h2>Como Você Prefere se Engajar Conosco?</h2>
+                <p>Queremos garantir uma comunicação eficaz e personalizada.</p>
+
+                <label>Com que frequência você gostaria de receber atualizações sobre o desenvolvimento da Pepper?</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="update_frequency" value="Diariamente" required> Diariamente</label>
+                    <label><input type="radio" name="update_frequency" value="Semanalmente"> Semanalmente</label>
+                    <label><input type="radio" name="update_frequency" value="Quinzenalmente"> Quinzenalmente</label>
+                    <label><input type="radio" name="update_frequency" value="Mensalmente"> Mensalmente</label>
+                    <label><input type="radio" name="update_frequency" value="Conforme necessário"> Conforme necessário</label>
+                </div>
+
+                <label>Quais tipos de conteúdo você gostaria de receber? (Selecione todos que se aplicam)</label>
+                <div class="checkbox-group">
+                    <label><input type="checkbox" name="content_type" value="Dicas de produtividade"> Dicas de produtividade</label>
+                    <label><input type="checkbox" name="content_type" value="Atualizações de desenvolvimento"> Atualizações de desenvolvimento</label>
+                    <label><input type="checkbox" name="content_type" value="Webinars e eventos online"> Webinars e eventos online</label>
+                    <label><input type="checkbox" name="content_type" value="Estudos de caso e testemunhos"> Estudos de caso e testemunhos</label>
+                    <label><input type="checkbox" name="content_type" value="Ofertas e descontos exclusivos"> Ofertas e descontos exclusivos</label>
+                    <label><input type="checkbox" name="content_type" value="Outro"> Outro <input type="text" name="content_type_other" id="content_type_other" placeholder="Especifique" disabled></label>
+                </div>
+
+                <label>Você estaria disposto a indicar a Pepper para amigos ou colegas?</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="referral_interest" value="Sim" required> Sim</label>
+                    <label><input type="radio" name="referral_interest" value="Não"> Não</label>
+                    <label><input type="radio" name="referral_interest" value="Talvez"> Talvez</label>
+                </div>
+
+                <div class="navigation-buttons">
+                    <button type="button" class="prev-btn">Anterior</button>
+                    <button type="button" class="next-btn">Próximo</button>
+                </div>
+            </div>
+
+            <!-- Página 7: Consentimentos e Envio -->
+            <div class="form-page" data-page="7">
+                <h2>Quase Lá!</h2>
+
+                <label>
+                    <input type="checkbox" name="privacy_consent" required> Aceito receber comunicações da Pepper Inc. de acordo com a <a href="#">Política de Privacidade</a>.
+                </label>
+
+                <label>
+                    <input type="checkbox" name="feedback_consent"> Aceito participar de pesquisas e fornecer feedback sobre a Pepper Inc.
+                </label>
+
+                <div class="navigation-buttons">
+                    <button type="button" class="prev-btn">Anterior</button>
+                    <button type="submit" class="submit-btn">Enviar Inscrição</button>
+                </div>
+            </div>
+
+            <!-- Mensagem de Confirmação -->
+            <div class="form-page" data-page="8">
+                <h2>Obrigado por se inscrever!</h2>
+                <p>Em breve, você receberá um email de confirmação com mais detalhes.</p>
+            </div>
+        </form>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
