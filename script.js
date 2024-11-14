@@ -147,16 +147,134 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // Função para coletar os dados do formulário
+    function collectFormData() {
+        const formData = {};
+
+        // Dados Pessoais
+        formData.fullName = document.getElementById('fullName').value.trim();
+        formData.email = document.getElementById('email').value.trim();
+        formData.whatsapp = document.getElementById('whatsapp').value.trim();
+        formData.age = parseInt(document.getElementById('age').value, 10);
+        const genderSelected = document.querySelector('input[name="gender"]:checked');
+        formData.gender = genderSelected.value;
+        if (formData.gender === 'Outro') {
+            formData.gender = document.getElementById('gender_other').value.trim();
+        }
+
+        // Perfil Profissional
+        formData.occupation = document.getElementById('occupation').value.trim();
+        formData.sector = document.getElementById('sector').value;
+        if (formData.sector === 'Outro') {
+            formData.sector = document.getElementById('sector_other').value.trim();
+        }
+        const experienceSelected = document.querySelector('input[name="experience"]:checked');
+        formData.experience = experienceSelected ? experienceSelected.value : '';
+        formData.income = document.getElementById('income').value;
+
+        // Gestão de Tempo e Tarefas
+        const toolsSelected = Array.from(document.querySelectorAll('input[name="tools"]:checked')).map(el => el.value);
+        if (toolsSelected.includes('Outra')) {
+            const otherTool = document.getElementById('tools_other').value.trim();
+            toolsSelected.splice(toolsSelected.indexOf('Outra'), 1, otherTool);
+        }
+        formData.tools = toolsSelected;
+
+        const challengesSelected = Array.from(document.querySelectorAll('input[name="challenges"]:checked')).map(el => el.value);
+        if (challengesSelected.includes('Outro')) {
+            const otherChallenge = document.getElementById('challenges_other').value.trim();
+            challengesSelected.splice(challengesSelected.indexOf('Outro'), 1, otherChallenge);
+        }
+        formData.challenges = challengesSelected;
+
+        formData.impact = document.getElementById('impact').value.trim();
+
+        // Interesse na Pepper Inc.
+        const motivationSelected = Array.from(document.querySelectorAll('input[name="motivation"]:checked')).map(el => el.value);
+        if (motivationSelected.includes('Outro')) {
+            const otherMotivation = document.getElementById('motivation_other').value.trim();
+            motivationSelected.splice(motivationSelected.indexOf('Outro'), 1, otherMotivation);
+        }
+        formData.motivation = motivationSelected;
+
+        const betaInterestSelected = document.querySelector('input[name="beta_interest"]:checked');
+        formData.beta_interest = betaInterestSelected ? betaInterestSelected.value : '';
+
+        formData.beneficiaries = document.getElementById('beneficiaries').value.trim();
+
+        // Preferências e Feedback
+        const updateFrequencySelected = document.querySelector('input[name="update_frequency"]:checked');
+        formData.update_frequency = updateFrequencySelected ? updateFrequencySelected.value : '';
+
+        const contentTypeSelected = Array.from(document.querySelectorAll('input[name="content_type"]:checked')).map(el => el.value);
+        if (contentTypeSelected.includes('Outro')) {
+            const otherContentType = document.getElementById('content_type_other').value.trim();
+            contentTypeSelected.splice(contentTypeSelected.indexOf('Outro'), 1, otherContentType);
+        }
+        formData.content_type = contentTypeSelected;
+
+        const referralInterestSelected = document.querySelector('input[name="referral_interest"]:checked');
+        formData.referral_interest = referralInterestSelected ? referralInterestSelected.value : '';
+
+        formData.privacy_consent = document.querySelector('input[name="privacy_consent"]').checked;
+        formData.feedback_consent = document.querySelector('input[name="feedback_consent"]').checked;
+
+        return formData;
+    }
+
+    // Função para enviar os dados para a API
+    async function submitFormData(formData) {
+        try {
+            const response = await fetch('https://api.pepperinc.com/subscribe', { // Substitua pela URL real da sua API
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            });
+
+            if (!response.ok) {
+                throw new Error(`Erro na submissão: ${response.statusText}`);
+            }
+
+            const result = await response.json();
+            return result;
+        } catch (error) {
+            console.error('Erro ao enviar o formulário:', error);
+            throw error;
+        }
+    }
+
     // Evento de submissão do formulário
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', async (e) => {
         e.preventDefault();
-        currentPage++;
-        showPage(currentPage);
 
-        // Aqui você pode adicionar o código para enviar os dados para o servidor
-        // Por exemplo, utilizando fetch() ou XMLHttpRequest
+        if (validatePage(currentPage)) {
+            // Coletar os dados do formulário
+            const data = collectFormData();
 
-        console.log('Formulário enviado!');
-        form.reset();
+            // Enviar os dados para a API
+            try {
+                const result = await submitFormData(data);
+                console.log('Formulário enviado com sucesso:', result);
+
+                // Mostrar a página de confirmação
+                currentPage++;
+                showPage(currentPage);
+
+                // Resetar o formulário
+                form.reset();
+
+                // Resetar os campos "Outro"
+                document.getElementById('gender_other').disabled = true;
+                document.getElementById('sector_other').disabled = true;
+                document.getElementById('tools_other').disabled = true;
+                document.getElementById('challenges_other').disabled = true;
+                document.getElementById('motivation_other').disabled = true;
+                document.getElementById('content_type_other').disabled = true;
+            } catch (error) {
+                alert('Ocorreu um erro ao enviar o formulário. Por favor, tente novamente mais tarde.');
+            }
+        }
     });
 });
