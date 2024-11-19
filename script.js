@@ -225,7 +225,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Função para enviar os dados para a API
 async function submitFormData(formData) {
     try {
-        const response = await fetch('https://qb264wxb-5000.brs.devtunnels.ms/', { // URL da sua API Flask
+        const response = await fetch('https://pepperleads-production.up.railway.app/subscribe', { // URL da sua API Flask
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
